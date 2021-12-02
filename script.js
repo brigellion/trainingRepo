@@ -1,37 +1,43 @@
 'use strict';
 
-let magicNumber = 77;
+let magicNumber = 66;
 
-function queryNumber(num) {
-    function question() {
-        let input = prompt('Угадай число от 1 до 100');
-        if (input === null) {
-            console.log(input, typeof input);
-            alert('Игра окончена');
-        } else {
-            input = Number(input);
-            if (input > 0) {
-                if (amountTry !== 0) {
-                    amountTry--;
-                } else {
-                    return;
-                }
-                if (input > num) {
-                    alert('Загаданное число меньше, осталось попыток ' + amountTry);
-                    question();
-                } else if (input < num) {
-                    alert('Загаданное число больше');
-                    question();
-                } else if (input === num) {
-                    alert('Поздравляю, Вы угадали!!!');
-                }
+function game(num, amountTry) {
+    function queryNumber(num) {
+        function question() {
+            let input = prompt('Угадай число от 1 до 100');
+            if (input === null) {
+                console.log(input, typeof input);
+                alert('Игра окончена');
             } else {
-                alert('Введи число!');
-                question();
+                input = Number(input);
+                if (input > 0) {
+                    if (--amountTry) {
+                        if (input > num) {
+                            alert('Загаданное число меньше, осталось попыток ' + amountTry);
+                            question();
+                        } else if (input < num) {
+                            alert('Загаданное число больше, осталось попыток ' + amountTry);
+                            question();
+                        } else if (input === num) {
+                            if (confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?')) {
+                                game(Math.floor(Math.random() * (10 - 1 + 1)) + 1, 10);
+                            }
+                        }
+                    } else {
+                        if (confirm('Попытки закончились, хотите сыграть еще?')) {
+                            game(magicNumber, 10);
+                        }
+                    }
+                } else {
+                    alert('Введи число!');
+                    question();
+                }
             }
         }
+        question();
     }
-    question();
+    queryNumber(num);
 }
 
-queryNumber(magicNumber);
+game(magicNumber, 10);
