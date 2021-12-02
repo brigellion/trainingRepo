@@ -2,39 +2,36 @@
 
 let magicNumber = 77;
 
-function game(amountTry, num) {
-
-    function queryNumber(num) {
-        function question() {
-            const input = prompt('Угадай число от 1 до 100');
-            if (input) {
-                if (typeof input == 'number') {
-                    if (amountTry !== 0) {
-                        amountTry--;
-                    } else {
-                        return;
-                    }
-                    if (input > num) {
-                        alert('Загаданное число меньше, осталось попыток ' + amountTry);
-                        question();
-                    } else if (input < num) {
-                        alert('Загаданное число больше');
-                        question();
-                    } else if (input === num) {
-                        alert('Поздравляю, Вы угадали!!!');
-                    }
+function queryNumber(num) {
+    function question() {
+        let input = prompt('Угадай число от 1 до 100');
+        if (input === null) {
+            console.log(input, typeof input);
+            alert('Игра окончена');
+        } else {
+            input = Number(input);
+            if (input > 0) {
+                if (amountTry !== 0) {
+                    amountTry--;
                 } else {
-                    alert('Введи число!');
+                    return;
+                }
+                if (input > num) {
+                    alert('Загаданное число меньше, осталось попыток ' + amountTry);
                     question();
+                } else if (input < num) {
+                    alert('Загаданное число больше');
+                    question();
+                } else if (input === num) {
+                    alert('Поздравляю, Вы угадали!!!');
                 }
             } else {
-                alert('Игра окончена');
+                alert('Введи число!');
+                question();
             }
         }
-        question();
     }
-    queryNumber(num);
+    question();
 }
 
-//queryNumber(magicNumber);
-game(10, magicNumber);
+queryNumber(magicNumber);
