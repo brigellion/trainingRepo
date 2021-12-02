@@ -4,9 +4,13 @@ let magicNumber = 77;
 
 function queryNumber(num) {
     function question() {
-        const input = prompt('Угадай число от 1 до 100');
-        if (input) {
-            if (typeof input == 'number') {
+        let input = prompt('Угадай число от 1 до 100');
+        if (input === null) {
+            console.log(input, typeof input);
+            alert('Игра окончена');
+        } else {
+            input = Number(input);
+            if (input > 0) {
 
                 if (input > num) {
                     alert('Загаданное число меньше');
@@ -21,8 +25,6 @@ function queryNumber(num) {
                 alert('Введи число!');
                 question();
             }
-        } else {
-            alert('Игра окончена');
         }
     }
     question();
