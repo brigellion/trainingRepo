@@ -1,24 +1,23 @@
 'use strict';
 
-let magicNumber = 77;
+let magicNumber = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
 
-function queryNumber(num) {
+function queryNumber() {
     function question() {
         let input = prompt('Угадай число от 1 до 100');
         if (input === null) {
-            console.log(input, typeof input);
             alert('Игра окончена');
         } else {
             input = Number(input);
             if (input > 0) {
 
-                if (input > num) {
+                if (input > magicNumber) {
                     alert('Загаданное число меньше');
                     question();
-                } else if (input < num) {
+                } else if (input < magicNumber) {
                     alert('Загаданное число больше');
                     question();
-                } else if (input === num) {
+                } else if (input === magicNumber) {
                     alert('Поздравляю, Вы угадали!!!');
                 }
             } else {
@@ -30,4 +29,4 @@ function queryNumber(num) {
     question();
 }
 
-queryNumber(magicNumber);
+queryNumber();
